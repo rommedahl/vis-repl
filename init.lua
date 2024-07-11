@@ -1,9 +1,7 @@
 --https://github.com/ninewise/dotfiles/blob/master/config/vis/visrc.lua
 --https://git.sr.ht/~gjabell/vis-check
 --https://git.sr.ht/~gjabell/vis-fix
---vis:command('map! normal sh :!python $vis_filename<Enter>')
 
---local function repl()
 local action = vis:action_register("REPL", function()
     local interactives = {
         ["bash"] = "!bash -i ",
