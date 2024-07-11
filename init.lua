@@ -2,8 +2,8 @@
 --https://git.sr.ht/~gjabell/vis-check
 --https://git.sr.ht/~gjabell/vis-fix
 
-local action = vis:action_register("REPL", function()
-    local interactives = {
+local repl = vis:action_register("REPL", function()
+    local repl_templates = {
         ["bash"] = "!bash -i %s",
         ["haskell"] = "!stack ghci %s",
         ["latex"] = "!tectonic %s",
@@ -11,12 +11,12 @@ local action = vis:action_register("REPL", function()
         ["python"] = "!python -i %s",
         ["rust"] = "!cargo test %s",
     }
-    local command = interactives[vis.win.syntax]
-    if command then
-        vis:command(string.format(command, vis.win.file.name))
+    local repl_template = repl_templates[vis.win.syntax]
+    if repl_template then
+        vis:command(string.format(repl_template, vis.win.file.name))
     else
         vis:info(string.format("No REPL configured for %s", vis.win.syntax))
     end
 end, "REPL")
 
-vis:map(vis.modes.NORMAL, ";i", action)
+vis:map(vis.modes.NORMAL, ";r", repl)
